@@ -49,6 +49,15 @@ test_that("selecting well works", {
   )
 })
 
-test_that("getting position works", {
-  expect_equal(position(well(1, 2)), c(1, 2))
+test_that("position works", {
+  well <- well(1, 2, list())
+
+  expect_equal(position(well), c(1, 2))
+  expect_equal(
+    {
+      position(well) <- c(2, 3)
+      position(well)
+    },
+    c(2, 3)
+  )
 })
