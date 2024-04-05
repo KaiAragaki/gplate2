@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/KaiAragaki/gplate2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/KaiAragaki/gplate2?branch=main)
+[![R-CMD-check](https://github.com/KaiAragaki/gplate2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KaiAragaki/gplate2/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 gplate2 is the successor of gplate, with the goal of providing a simpler
