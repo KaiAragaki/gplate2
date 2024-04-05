@@ -32,7 +32,13 @@ content.well <- function(x) {
   x$content
 }
 
+#' @export
 `content<-` <- function(x, value) {
+  UseMethod("content<-")
+}
+
+#' @export
+`content<-.well` <- function(x, value) {
   x$content <- value
   x
 }
