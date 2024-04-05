@@ -54,3 +54,22 @@ update_well.well <- function(x, content_new, overwrite = TRUE) {
 update_will_overwrite <- function(content_old, content_new) {
   any(names(content_old) %in% names(content_new))
 }
+
+#' @export
+select_well <- function(x, ...) {
+  UseMethod("select_well")
+}
+
+#' @export
+select_well.well <- function(x, select) {
+  indices <- tidyselect::eval_select(rlang::enquo(select), content(x))
+  # If everything is removed, will output named integer(0).
+  # Convert to empty list to align with constructor with no content
+  content(x) <- if (length(indices) == 0) {
+    list()
+  } else {
+    content(x)[indices]
+  }
+
+  x
+}

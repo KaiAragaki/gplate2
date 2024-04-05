@@ -14,3 +14,14 @@ test_that("updating well works", {
     "New contents will overwrite old and overwrite = FALSE"
   )
 })
+
+test_that("selecting well works", {
+  empty_well <- new_well(1, 1, list())
+  full_well <- new_well(1, 1, list(a = "a"))
+  expect_equal(
+    select_well(full_well, -a), empty_well
+  )
+  expect_equal(
+    select_well(full_well, a), full_well
+  )
+})
