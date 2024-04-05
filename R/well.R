@@ -76,6 +76,5 @@ select_well.well <- function(x, select) {
   } else {
     content(x)[indices]
   }
-
   x
 }
