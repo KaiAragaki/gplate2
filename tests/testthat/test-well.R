@@ -48,3 +48,7 @@ test_that("selecting well works", {
     select_well(full_well, a), full_well
   )
 })
+
+test_that("getting position works", {
+  expect_equal(position(well(1, 2)), c(1, 2))
+})

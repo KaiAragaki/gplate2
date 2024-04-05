@@ -16,7 +16,7 @@ is 1, 1}
 Create a new well
 }
 \examples{
-my_well <- new_well(
+my_well <- well(
  1, 1,
  content =
    list(

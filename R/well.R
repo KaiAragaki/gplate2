@@ -10,7 +10,7 @@ new_well <- function(x = is.double(), y = is.double(), content = list()) {
 #' @param content a named list of key = value pairs containing well data
 #'
 #' @examples
-#' my_well <- new_well(
+#' my_well <- well(
 #'  1, 1,
 #'  content =
 #'    list(
@@ -37,7 +37,13 @@ check_names <- function(well) {
     stop("All items of `content` must be named")
 }
 
+#' Get and set the position of a well
+#' @param x A `well`
+#' @param value A numeric vector
 #' @export
+#' @return For getting, a vector with two values. For setting, a well.
+#' @details Coordinates are from the bottom left of the plate, starting at (1,
+#'   1)
 position <- function(x) {
   UseMethod("position")
 }
@@ -47,34 +53,61 @@ position.well <- function(x) {
   x$position
 }
 
+#' @rdname position
 #' @export
+`position<-` <- function(x, value) {
+  UseMethod("position<-")
+}
+
+#' @export
+`position<-.well` <- function(x, value) {
+  x$position <- value
+  x
+}
+
+#' Get or set the contents of a well
+#' @export
+#' @param x A `well`
+#' @param value A named list - what to supply the list
+#' @return For getting, a named list. For setting, a well.
 content <- function(x) {
   UseMethod("content")
 }
 
+#' @rdname content
 #' @export
 content.well <- function(x) {
   x$content
 }
 
+#' @rdname content
 #' @export
 `content<-` <- function(x, value) {
   UseMethod("content<-")
 }
 
+#' @rdname content
 #' @export
 `content<-.well` <- function(x, value) {
   x$content <- value
   x
 }
 
+#' Append to content in a well
+#' @param x A well
+#' @param ... Arguments passed on to their repsective methods
+#' @return A `well`
 #' @export
 update_well <- function(x, ...) {
   UseMethod("update_well")
 }
 
+#' @param content_new A named list of content to be added to the well
+#' @param overwrite If multiple contents have the same name, should it be
+#'   overwritten?
+#' @rdname update_well
 #' @export
-update_well.well <- function(x, content_new, overwrite = TRUE) {
+update_well.well <- function(x, content_new, overwrite = TRUE, ...) {
   content_old <- content(x)
   if (update_will_overwrite(content_old, content_new) && !overwrite)
     stop("New contents will overwrite old and overwrite = FALSE")
@@ -86,13 +119,19 @@ update_will_overwrite <- function(content_old, content_new) {
   any(names(content_old) %in% names(content_new))
 }
 
+#' Select contents from a well
+#' @param x the well to select
+#' @param ... arguments passed on to their respective methods
+#' @return A `well`
 #' @export
 select_well <- function(x, ...) {
   UseMethod("select_well")
 }
 
+#' @param select Columns to select. Uses tidyselect.
+#' @rdname select_well
 #' @export
-select_well.well <- function(x, select) {
+select_well.well <- function(x, select, ...) {
   indices <- tidyselect::eval_select(rlang::enquo(select), content(x))
   # If everything is removed, will output named integer(0).
   # Convert to empty list to align with constructor with no content
