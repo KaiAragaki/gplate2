@@ -32,6 +32,11 @@ content.well <- function(x) {
   x$content
 }
 
+`content<-` <- function(x, value) {
+  x$content <- value
+  x
+}
+
 #' @export
 update_well <- function(x, ...) {
   UseMethod("update_well")
@@ -39,10 +44,11 @@ update_well <- function(x, ...) {
 
 #' @export
 update_well.well <- function(x, content_new, overwrite = TRUE) {
-  browser()
   content_old <- content(x)
   if (update_will_overwrite(content_old, content_new) && !overwrite)
     stop("New contents will overwrite old and overwrite = FALSE")
+  content(x) <- content_new
+  x
 }
 
 update_will_overwrite <- function(content_old, content_new) {
