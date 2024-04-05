@@ -18,7 +18,7 @@ new_well <- function(x = is.double(), y = is.double(), content = list()) {
 #'      dox = list(time = 1, time_unit = "hr", conc = 100, conc_unit = "ng/mL")
 #'    )
 #')
-well <- function(x, y, content) {
+well <- function(x, y, content = list()) {
   new_well(x, y, content)
 }
 
