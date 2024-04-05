@@ -19,7 +19,22 @@ new_well <- function(x = is.double(), y = is.double(), content = list()) {
 #'    )
 #')
 well <- function(x, y, content = list()) {
-  new_well(x, y, content)
+  if (is.null(content)) content <- list()
+  well <- new_well(x, y, content)
+  validate_well(well)
+}
+
+validate_well <- function(well) {
+  check_names(well)
+  well
+}
+
+check_names <- function(well) {
+  if (length(content(well)) == 0) return()
+
+  content_names <- names(content(well))
+  if (any(content_names == "") || is.null(content_names))
+    stop("All items of `content` must be named")
 }
 
 #' @export

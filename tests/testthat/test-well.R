@@ -1,3 +1,26 @@
+test_that("creating well works", {
+  expect_equal(
+    well(1, 1, list()),
+    new_well(1, 1, list())
+  )
+  expect_equal(
+    well(1, 1),
+    new_well(1, 1, list())
+  )
+  expect_equal(
+    well(1, 1, NULL),
+    new_well(1, 1, list())
+  )
+  expect_error(
+    well(1, 1, list(1)),
+    "All items of `content` must be named"
+  )
+  expect_error(
+    well(1, 1, list(1, a = "2")),
+    "All items of `content` must be named"
+  )
+})
+
 test_that("updating well works", {
   empty_well <- well(1, 1, list())
   full_well <- well(1, 1, list(a = "a"))
