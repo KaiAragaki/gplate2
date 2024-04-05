@@ -4,7 +4,7 @@
 \alias{well}
 \title{Create a new well}
 \usage{
-well(x, y, content)
+well(x, y, content = list())
 }
 \arguments{
 \item{x, y}{the x and y position of the well, where the bottom left hand well
