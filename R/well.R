@@ -1,15 +1,25 @@
-# Well
-#
-# Does a well have a location? Or does it make sense for a superstructure to
-# orchestrate location?
-#
-# A well should contain a list of key-pair values that describe its contents
-#
-# Few validators for correctness - don't get in the way
-
 new_well <- function(x = is.double(), y = is.double(), content = list()) {
   stopifnot(is.double(x), is.double(y), is.list(content))
   structure(list(position = c(x, y), content = content), class = "well")
+}
+
+#' Create a new well
+#' @export
+#' @param x,y the x and y position of the well, where the bottom left hand well
+#'   is 1, 1
+#' @param content a named list of key = value pairs containing well data
+#'
+#' @examples
+#' my_well <- new_well(
+#'  1, 1,
+#'  content =
+#'    list(
+#'      data = iris,
+#'      dox = list(time = 1, time_unit = "hr", conc = 100, conc_unit = "ng/mL")
+#'    )
+#')
+well <- function(x, y, content) {
+  new_well(x, y, content)
 }
 
 #' @export
