@@ -19,6 +19,8 @@ plate(x, ...)
 \item{x}{A \code{well} or list of wells}
 
 \item{...}{additional arguments passed to their respective methods}
+
+\item{name}{the 'key' in 'key = value' for plate contents}
 }
 \value{
 a \code{plate}

@@ -25,6 +25,7 @@ plate.list <- function(x, ...) {
 }
 
 #' @rdname plate
+#' @param name the 'key' in 'key = value' for plate contents
 #' @export
 plate.data.frame <- function(x, name, ...) {
   wells <- data_frame_to_wells(x, name)
