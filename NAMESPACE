@@ -3,6 +3,7 @@
 S3method("content<-",well)
 S3method("position<-",well)
 S3method(content,well)
+S3method(plate,data.frame)
 S3method(plate,list)
 S3method(plate,well)
 S3method(position,well)

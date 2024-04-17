@@ -4,6 +4,7 @@
 \alias{plate}
 \alias{plate.well}
 \alias{plate.list}
+\alias{plate.data.frame}
 \title{Create a plate}
 \usage{
 plate(x, ...)
@@ -11,6 +12,8 @@ plate(x, ...)
 \method{plate}{well}(x, ...)
 
 \method{plate}{list}(x, ...)
+
+\method{plate}{data.frame}(x, name, ...)
 }
 \arguments{
 \item{x}{A \code{well} or list of wells}
