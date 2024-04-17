@@ -1,5 +1,5 @@
 new_well <- function(x = is.double(), y = is.double(), content = list()) {
-  stopifnot(is.double(x), is.double(y), is.list(content))
+  stopifnot(is.numeric(x), is.numeric(y), is.list(content))
   structure(list(position = c(x, y), content = content), class = "well")
 }
 

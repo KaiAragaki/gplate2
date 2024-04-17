@@ -11,6 +11,10 @@ test_that("creating well works", {
     well(1, 1, NULL),
     new_well(1, 1, list())
   )
+  expect_equal(
+    well(1L, 1L, NULL), # Using integer works
+    new_well(1, 1, list())
+  )
   expect_error(
     well(1, 1, list(1)),
     "All items of `content` must be named"
