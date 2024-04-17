@@ -31,6 +31,14 @@ plate.data.frame <- function(x, name, ...) {
   new_plate(wells = wells)
 }
 
+#' @export
+t.plate <- function(x, ...) {
+  lapply(x, \(well) {
+    position(well) <- rev(position(well))
+    well
+  }) |>
+    plate()
+}
 
 vec_to_wells <- function(vector, name, x = 1) {
   stopifnot(length(name) == 1) # required for setting name in second lapply
