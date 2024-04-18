@@ -4,10 +4,10 @@
 \alias{well}
 \title{Create a new well}
 \usage{
-well(x, y, content = list())
+well(row, col, content = list())
 }
 \arguments{
-\item{x, y}{the x and y position of the well, where the bottom left hand well
+\item{row, col}{the row and col position of the well, where the upper left
 is 1, 1}
 
 \item{content}{a named list of key = value pairs containing well data}

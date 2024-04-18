@@ -21,6 +21,5 @@ For getting, a vector with two values. For setting, a well.
 Get and set the position of a well
 }
 \details{
-Coordinates are from the bottom left of the plate, starting at (1,
-1)
+Coordinates follow the row, col indexing convention of dataframes
 }

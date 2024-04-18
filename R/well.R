@@ -1,11 +1,11 @@
-new_well <- function(x = is.double(), y = is.double(), content = list()) {
-  stopifnot(is.numeric(x), is.numeric(y), is.list(content))
-  structure(list(position = c(x, y), content = content), class = "well")
+new_well <- function(row = is.double(), col = is.double(), content = list()) {
+  stopifnot(is.numeric(row), is.numeric(col), is.list(content))
+  structure(list(position = c(row, col), content = content), class = "well")
 }
 
 #' Create a new well
 #' @export
-#' @param x,y the x and y position of the well, where the bottom left hand well
+#' @param row,col the row and col position of the well, where the upper left
 #'   is 1, 1
 #' @param content a named list of key = value pairs containing well data
 #'
@@ -18,9 +18,9 @@ new_well <- function(x = is.double(), y = is.double(), content = list()) {
 #'      dox = list(time = 1, time_unit = "hr", conc = 100, conc_unit = "ng/mL")
 #'    )
 #')
-well <- function(x, y, content = list()) {
+well <- function(row, col, content = list()) {
   if (is.null(content)) content <- list()
-  well <- new_well(x, y, content)
+  well <- new_well(row, col, content)
   validate_well(well)
 }
 
@@ -30,11 +30,14 @@ validate_well <- function(well) {
 }
 
 check_names <- function(well) {
-  if (length(content(well)) == 0) return()
+  if (length(content(well)) == 0) {
+    return()
+  }
 
   content_names <- names(content(well))
-  if (any(content_names == "") || is.null(content_names))
+  if (any(content_names == "") || is.null(content_names)) {
     stop("All items of `content` must be named")
+  }
 }
 
 #' Get and set the position of a well
@@ -42,8 +45,7 @@ check_names <- function(well) {
 #' @param value A numeric vector
 #' @export
 #' @return For getting, a vector with two values. For setting, a well.
-#' @details Coordinates are from the bottom left of the plate, starting at (1,
-#'   1)
+#' @details Coordinates follow the row, col indexing convention of dataframes
 position <- function(x) {
   UseMethod("position")
 }

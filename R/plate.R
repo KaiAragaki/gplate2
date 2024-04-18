@@ -41,12 +41,12 @@ t.plate <- function(x, ...) {
     plate()
 }
 
-vec_to_wells <- function(vector, names, x = 1) {
+vec_to_wells <- function(vector, names, row = 1) {
   content <- lapply(vector, list)
   content <- mapply(stats::setNames, content, names, SIMPLIFY = FALSE)
   mapply(
     well,
-    x = x, y = rev(seq_along(vector)),
+    row = row, col = seq_along(vector),
     content = content,
     SIMPLIFY = FALSE
   )
@@ -55,7 +55,7 @@ vec_to_wells <- function(vector, names, x = 1) {
 data_frame_to_wells <- function(df, names) {
   out <- sapply(
     seq_len(ncol(df)),
-    \(i) vec_to_wells(df[, i], names, x = i),
+    \(i) vec_to_wells(df[i, ], names, row = i),
     simplify = FALSE
   )
   names(out) <- NULL
