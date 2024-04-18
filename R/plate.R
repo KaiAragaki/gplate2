@@ -41,27 +41,21 @@ t.plate <- function(x, ...) {
     plate()
 }
 
-vec_to_wells <- function(vector, name, x = 1) {
-  stopifnot(length(name) == 1) # required for setting name in second lapply
-  ## Could get around this with mapply I think
-  content <- vector |>
-    lapply(list) |>
-    lapply(\(x) {
-      names(x) <- name
-      x
-    })
+vec_to_wells <- function(vector, names, x = 1) {
+  content <- lapply(vector, list)
+  content <- mapply(stats::setNames, content, names, SIMPLIFY = FALSE)
   mapply(
     well,
-    x = x, y = rev(seq_len(length(vector))),
+    x = x, y = rev(seq_along(vector)),
     content = content,
     SIMPLIFY = FALSE
   )
 }
 
-data_frame_to_wells <- function(df, name) {
+data_frame_to_wells <- function(df, names) {
   out <- sapply(
     seq_len(ncol(df)),
-    \(i) vec_to_wells(df[, i], name, x = i),
+    \(i) vec_to_wells(df[, i], names, x = i),
     simplify = FALSE
   )
   names(out) <- NULL
